@@ -1,9 +1,6 @@
 {% load tree_tags %}
 <html>
     {% if items %}
-        {% for item in items %}
-            {% generate_html_tree items %}
-        <li>{{ item.title }}</li>
-        {% endfor %}
+           {% generate_html_tree items %}
     {% endif %}
 </html>
