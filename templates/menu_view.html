@@ -1,0 +1,14 @@
+
+<h1>{{ menu.title }}</h1>
+<ul>
+{% for item in items %}
+  <li>
+    {{ item.title }}
+    {% if item.children %}
+      {% with items=item.children %}
+        {% include "tree.html" %}
+      {% endwith %}
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
