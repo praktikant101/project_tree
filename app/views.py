@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.views import View
 
 from .models import Menu, Item
+from django.template import Library
+
+register = Library()
 
 
 class MenuListView(View):
@@ -18,11 +21,12 @@ class MenuListView(View):
 class MenuView(View):
 
     def get(self, request, pk):
-        menu = Menu.objects.prefetch_related(Prefetch("items",
-                                                       queryset=Item.objects.filter(parent_id=None))).get(id=pk)
-        items = Item.objects.select_related('parent').prefetch_related('children').filter(pk=pk)
+        # menu = Menu.objects.prefetch_related(Prefetch("items",
+        #                                               queryset=Item.objects.filter(parent_id=None))).get(id=pk)
+        items = Item.objects.select_related('parent').prefetch_related('children').filter(menu_id=pk)
         context = {
             "items": items,
         }
-
         return render(request, "menu_view.html", context)
+
+

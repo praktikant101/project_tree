@@ -1,14 +1,9 @@
-
-<h1>{{ menu.title }}</h1>
-<ul>
-{% for item in items %}
-  <li>
-    {{ item.title }}
-    {% if item.children %}
-      {% with items=item.children %}
-        {% include "tree.html" %}
-      {% endwith %}
+{% load tree_tags %}
+<html>
+    {% if items %}
+        {% for item in items %}
+            {% generate_html_tree items %}
+        <li>{{ item.title }}</li>
+        {% endfor %}
     {% endif %}
-  </li>
-{% endfor %}
-</ul>
+</html>

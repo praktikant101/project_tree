@@ -1,10 +1,9 @@
 from django.contrib import admin, messages
-from django.core.exceptions import ValidationError
-from django import forms
 
 from .models import Menu, Item
 
-admin.site.register(Menu)
+
+# admin.site.register(Menu)
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -21,4 +20,13 @@ class ItemAdmin(admin.ModelAdmin):
         super(ItemAdmin, self).save_model(request, obj, form, change)
 
 
+class ItemInline(admin.TabularInline):
+    model = Item
+
+
+class MenuAdmin(admin.ModelAdmin):
+    inlines = [ItemInline, ]
+
+
+admin.site.register(Menu, MenuAdmin)
 admin.site.register(Item, ItemAdmin)
