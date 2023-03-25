@@ -3,9 +3,6 @@ from django.contrib import admin, messages
 from .models import Menu, Item
 
 
-# admin.site.register(Menu)
-
-
 class ItemAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):

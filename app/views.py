@@ -1,11 +1,7 @@
-from django.db.models import Prefetch
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views import View
 
 from .models import Menu, Item
-from django.template import Library
-
-register = Library()
 
 
 class MenuListView(View):
