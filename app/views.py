@@ -1,5 +1,5 @@
 from django.db.models import Prefetch
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 from .models import Menu, Item
@@ -21,12 +21,14 @@ class MenuListView(View):
 class MenuView(View):
 
     def get(self, request, pk):
-        # menu = Menu.objects.prefetch_related(Prefetch("items",
-        #                                               queryset=Item.objects.filter(parent_id=None))).get(id=pk)
+
         items = Item.objects.select_related('parent').prefetch_related('children').filter(menu_id=pk)
+
         context = {
             "items": items,
+            "menu": items.first().menu.title
         }
-        return render(request, "menu_view.html", context)
+
+        return render(request, "tree.html", context)
 
 

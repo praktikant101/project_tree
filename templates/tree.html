@@ -1,0 +1,18 @@
+{% block menu %}
+    <li>{{ menu.title }}</li>
+    {% if menu.children.all %}
+        <ul>
+            {% for item in menu.children.all %}
+                {% with item=item %}
+                    {% include 'item.html' %}
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+<ul>
+    {% for item in items %}
+        {% include 'item.html' %}
+    {% endfor %}
+</ul>

@@ -1,0 +1,12 @@
+{% block item %}
+    <li>{{ item.title }}</li>
+    {% if item.children.all %}
+        <ul>
+            {% for item in item.children.all %}
+                {% with item=item %}
+                    {% include 'item.html' %}
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
